@@ -41,7 +41,6 @@ UserSchema.methods.generateToken = function () {
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
-
   this.password = await argon2.hash(this.password);
   next();
 });
