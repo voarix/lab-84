@@ -17,7 +17,7 @@ userRouter.post("/", async (req, res, next) => {
   } catch (error) {
 
     if (error instanceof Error.ValidationError) {
-      res.status(400).send(error);
+      res.status(400).send({error: error.message});
       return;
     }
 

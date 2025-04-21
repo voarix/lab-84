@@ -33,10 +33,52 @@ taskRouter.post("/", auth, async (req, res, next) => {
     res.send(task);
   } catch (error) {
     if (error instanceof Error.ValidationError) {
-      res.status(400).send(error);
+      res.status(400).send({error: error.message});
       return;
     }
 
+    next(error);
+  }
+});
+
+taskRouter.put("/:id", auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+
+    const task = await Task.findOne({_id: req.params.id, user: user._id});
+    if (!task) {
+      res.status(403).send({error: "Task not found"});
+      return;
+    }
+
+    if (req.body.title) task.title = req.body.title;
+    if (req.body.description) task.description = req.body.description;
+    if (req.body.status) task.status = req.body.status;
+
+    await task.save();
+    res.send(task);
+  } catch (error) {
+    if (error instanceof Error.ValidationError) {
+      res.status(400).send({error: error.message});
+      return;
+    }
+
+    next(error);
+  }
+});
+
+taskRouter.delete("/:id", auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+
+    const task = await Task.findOneAndDelete({_id: req.params.id, user: user._id});
+    if (!task) {
+      res.status(403).send({error: "Task not found"});
+      return;
+    }
+
+    res.send({message: "Task deleted successfully"});
+  } catch (error) {
     next(error);
   }
 });
