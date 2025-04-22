@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserMutation } from "../../../types";
 import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material";
 
@@ -37,6 +37,10 @@ const UserForm: React.FC<Props> = ({onSubmit, loading, isLogin}) => {
       alert("Please enter password or username");
     }
   };
+
+  useEffect(() => {
+    setForm(initialForm);
+  }, [isLogin]);
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{

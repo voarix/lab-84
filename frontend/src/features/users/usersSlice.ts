@@ -1,6 +1,6 @@
 import { IUser } from "../../types";
 import { createSlice } from "@reduxjs/toolkit";
-import { userCreate } from "./usersThunks.ts";
+import { userCreate, userLogin } from "./usersThunks.ts";
 import { RootState } from "../../app/store.ts";
 
 interface UsersState {
@@ -35,6 +35,20 @@ const usersSlice = createSlice({
       .addCase(userCreate.rejected, (state) => {
         state.createLoading = false;
         state.error = true;
+      })
+
+      .addCase(userLogin.pending, (state) => {
+        state.loginLoading = true;
+        state.error = false;
+      })
+      .addCase(userLogin.fulfilled, (state, { payload: user }) => {
+        state.loginLoading = false;
+        state.error = false;
+        state.user = user;
+      })
+      .addCase(userLogin.rejected, (state) => {
+        state.loginLoading = false;
+        state.error = true;
       });
   }
 });
@@ -42,4 +56,5 @@ const usersSlice = createSlice({
 export const usersReducer = usersSlice.reducer;
 
 export const selectUser = (state: RootState) => state.users.user;
-export const selectUserLoading = (state: RootState) => state.users.createLoading;
+export const selectUserCreateLoading = (state: RootState) => state.users.createLoading;
+export const selectUserLoginLoading = (state: RootState) => state.users.loginLoading;

@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import NewUser from "./Containers/User/NewUser.tsx";
 import AppToolbar from "./components/ToolBar.tsx";
 import Tasks from "./features/tasks/Tasks.tsx";
+import LoginUser from "./Containers/User/LoginUser.tsx";
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
           <Routes>
             <Route path="/register" element={<NewUser/>}/>
             <Route path="/" element={<NewUser/>}/>
+            <Route path="/session" element={<LoginUser/>}/>
             <Route path="/tasks" element={<Tasks/>}/>
             <Route
               path="*"

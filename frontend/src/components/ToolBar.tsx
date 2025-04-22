@@ -19,7 +19,7 @@ const AppToolbar = () => {
           </Typography>
 
           <Box>
-            <Link to="/login" sx={{mr: 2}}>Login</Link>
+            <Link to="/session" sx={{mr: 2}}>Login</Link>
             |
             <Link to="/register" sx={{ml: 2}}>Register</Link>
           </Box>
