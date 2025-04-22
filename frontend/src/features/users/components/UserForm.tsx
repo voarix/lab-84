@@ -48,7 +48,6 @@ const UserForm: React.FC<Props> = ({onSubmit, loading, isLogin}) => {
       p: 3,
       maxWidth: 700,
       mx: "auto",
-      backgroundColor: "white",
       borderRadius: 2,
       boxShadow: 2,
     }}>

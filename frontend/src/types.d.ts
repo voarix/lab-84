@@ -6,10 +6,20 @@ export interface ITask {
   status: "new" | "in progress" | "complete";
 }
 
+export interface TaskMutation {
+  title: string;
+  description?: string;
+  status?: "new" | "in progress" | "complete";
+}
+
+export interface TaskResponse {
+    tasks: Task[];
+    user: IUser;
+}
+
 export interface IUser {
   _id: string;
   username: string;
-  password: string;
   token: string;
 }
 
