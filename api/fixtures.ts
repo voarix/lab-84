@@ -35,8 +35,8 @@ const run = async () => {
   await Task.create(
     {
       user: vaderUser._id,
-      title: "Become stronger",
-      description: "Sleeeeeeeep",
+      title: "ask about promotion",
+      description: "Negotiate terms",
       status: "new"
     },
     {
